@@ -5,6 +5,11 @@ import cookieSession from 'cookie-session'; // Transfer JWT via cookie
 
 import { errorHandler, NotFoundError, currentUser } from '@agreejwc/common';
 
+import { createOrderRouter } from './routes/create';
+import { deleteOrderRouter } from './routes/delete';
+import { indexOrderRouter } from './routes/index';
+import { showOrderRouter } from './routes/show';
+
 const app = express();
 app.set('trust proxy', true); // https://expressjs.com/zh-tw/guide/behind-proxies.html
 app.use(json());
@@ -18,6 +23,11 @@ app.use(
 ); // https://www.npmjs.com/package/cookie-session
 
 app.use(currentUser);
+
+app.use(createOrderRouter);
+app.use(deleteOrderRouter);
+app.use(indexOrderRouter);
+app.use(showOrderRouter);
 
 app.all('*', async (req, res) => {
   // Fix Express async bug
