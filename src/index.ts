@@ -23,11 +23,18 @@ const startApp = async () => {
     throw new Error('NATS_URL must be defined');
   }
 
+  if (!process.env.EXPIRATION_TIME_SECONDS) {
+    throw new Error('EXPIRATION_TIME_SECONDS must be defined');
+  }
+
   console.log(`JWT_SECRET_KEY = ${process.env.JWT_SECRET_KEY}`);
   console.log(`MONGO_URI = ${process.env.MONGO_URI}`);
   console.log(`NATS_CLUSTER_ID = ${process.env.NATS_CLUSTER_ID}`);
   console.log(`NATS_CLIENT_ID = ${process.env.NATS_CLIENT_ID}`);
   console.log(`NATS_URL = ${process.env.NATS_URL}`);
+  console.log(
+    `EXPIRATION_TIME_SECONDS = ${process.env.EXPIRATION_TIME_SECONDS}`
+  );
 
   try {
     await natsWrapper.connect(
