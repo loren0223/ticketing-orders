@@ -3,7 +3,7 @@ import { OrderStatus } from '@agreejwc/common';
 import { TicketDoc } from './ticket';
 export { OrderStatus };
 
-interface orderAttrs {
+interface OrderAttrs {
   userId: string;
   status: string;
   expiresAt: Date;
@@ -20,7 +20,7 @@ interface OrderDoc extends mongoose.Document {
 }
 
 interface OrderModel extends mongoose.Model<OrderDoc> {
-  build(input: orderAttrs): OrderDoc;
+  build(input: OrderAttrs): OrderDoc;
 }
 
 const orderSchema = new mongoose.Schema(
@@ -52,7 +52,7 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
-orderSchema.statics.build = (input: orderAttrs) => {
+orderSchema.statics.build = (input: OrderAttrs) => {
   return new Order(input);
 };
 

@@ -1,4 +1,9 @@
 import express, { Request, Response } from 'express';
+import { body } from 'express-validator';
+
+import { Order } from '../models/order';
+import { Ticket } from '../models/ticket';
+
 import {
   requireAuth,
   validateRequest,
@@ -6,10 +11,6 @@ import {
   NotFoundError,
   OrderStatus,
 } from '@agreejwc/common';
-import { body } from 'express-validator';
-
-import { Order } from '../models/order';
-import { Ticket } from '../models/ticket';
 
 const router = express.Router();
 
@@ -30,7 +31,7 @@ router.post(
     // Make sure that the ticket is not already reserved
     const isReserved = await ticket.isReserved();
     if (isReserved) {
-      return new BadRequestError('Ticket is already reserved');
+      throw new BadRequestError('Ticket is already reserved');
     }
 
     // Calculate the expiration date for the order
