@@ -30,4 +30,5 @@ class NatsWrapper {
   }
 }
 
+// Singleton instance
 export const natsWrapper = new NatsWrapper();

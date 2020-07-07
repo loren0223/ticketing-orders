@@ -3,8 +3,7 @@ import { app } from '../../app';
 import mongoose from 'mongoose';
 import { Order, OrderStatus } from '../../models/order';
 import { Ticket } from '../../models/ticket';
-
-//jest.setTimeout(10000);
+import { natsWrapper } from '../../nats-wrapper';
 
 it('return an error if the ticket does not exist', async () => {
   const ticketId = mongoose.Types.ObjectId();
@@ -51,6 +50,7 @@ it('reserves a ticket', async () => {
   orders = await Order.find({});
   expect(orders.length).toEqual(1);
   expect(response.body.ticket.id).toEqual(ticket.id);
-});
 
-it.todo('emit an order created event');
+  //emit an order created event
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
