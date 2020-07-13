@@ -16,7 +16,11 @@ it('return an error if the ticket does not exist', async () => {
 });
 
 it('return an error if the ticket is already reserved', async () => {
-  const ticket = Ticket.build({ title: 'concert', price: 100 });
+  const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: 'concert',
+    price: 100,
+  });
   await ticket.save();
 
   const order = Order.build({
@@ -38,7 +42,11 @@ it('reserves a ticket', async () => {
   let orders = await Order.find({});
   expect(orders.length).toEqual(0);
 
-  const ticket = Ticket.build({ title: 'concert', price: 100 });
+  const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: 'concert',
+    price: 100,
+  });
   await ticket.save();
 
   const response = await request(app)
