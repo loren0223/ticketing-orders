@@ -12,6 +12,7 @@ it('marks the order as cancelled', async () => {
     id: new mongoose.Types.ObjectId().toHexString(),
     title: 'concert',
     price: 10,
+    version: 0,
   });
   await ticket.save();
 

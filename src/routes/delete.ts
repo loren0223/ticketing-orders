@@ -22,6 +22,7 @@ router.delete(
     if (!order) {
       throw new NotFoundError('Order not found');
     }
+
     if (order.userId !== req.currentuser!.id) {
       throw new NotAuthorizedError();
     }

@@ -15,6 +15,7 @@ const setup = async () => {
     id: new mongoose.Types.ObjectId().toHexString(),
     title: 'movie',
     price: 10,
+    version: 0,
   });
   await ticket.save();
 
