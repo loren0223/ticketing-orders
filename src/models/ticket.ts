@@ -5,6 +5,7 @@ interface TicketAttrs {
   id: string;
   title: string;
   price: number;
+  version: number;
 }
 
 export interface TicketDoc extends mongoose.Document {
@@ -60,6 +61,7 @@ ticketSchema.pre('save', function (done) {
 ticketSchema.statics.build = (input: TicketAttrs) => {
   return new Ticket({
     _id: input.id,
+    version: input.version,
     title: input.title,
     price: input.price,
   });
